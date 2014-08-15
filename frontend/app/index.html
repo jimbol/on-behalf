@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OnBehalf</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{BASE_TAG}}
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/on-behalf.css">
+  </head>
+  <body>
+    <script>
+      window.OnBehalfENV = {{ENV}};
+      window.EmberENV = window.OnBehalfENV.EmberENV;
+    </script>
+    <script src="assets/vendor.js"></script>
+    <script src="assets/on-behalf.js"></script>
+    <script>
+      window.OnBehalf = require('on-behalf/app')['default'].create(OnBehalfENV.APP);
+    </script>
+  </body>
+</html>
