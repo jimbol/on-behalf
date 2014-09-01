@@ -1,0 +1,180 @@
+@import "variables"
+@import "fonts"
+@import "functions"
+
+// styles
+html, body, div, ul, h1, h2, h3, h4
+    margin: 0
+    padding: 0
+    color: darkTan
+
+body
+    font-family: helvetica, arial
+    background-image: url("halftone.png")
+
+header
+    background-color: lightGrey
+    height: 75px
+    border-top: 5px solid accentGreen
+    border-bottom: 1px solid #ddd
+
+    nav
+        content()
+
+        h2
+            inset()
+
+            color: accentPeach
+            display: inline-block
+            font-family: pacifico
+            font-size: 38px
+            font-weight: normal
+            margin-top: 5px
+
+
+        input
+            textInput()
+
+            float: right
+            margin-top: 16px
+
+
+section
+    padding-bottom: 25px
+
+    .search
+        content()
+        text-align: center
+
+        h1
+            inset()
+
+            color: primaryTan
+            font-family: andadasc
+            font-size: 90px
+            font-weight: normal
+            padding: 70px 0 35px 0
+
+        input
+
+            textInput()
+
+            border: 10px solid #DBDAD3
+            font-size: 30px
+            height: 45px
+            margin: 0 auto
+            width: 300px
+
+
+    .row
+        content()
+        padding-top: 60px
+
+        h2
+            font-family: andadasc
+            font-weight: normal
+            color: primaryTan
+            font-size: 40px
+
+
+
+.main-content
+    background-color: lightGrey
+    border-bottom: 1px solid accentGreen
+    border-top: 1px solid #ddd
+    margin-top: 60px
+    min-height: 400px
+
+    .row
+        content()
+        margin-top: 60px
+        margin-bottom: 30px
+
+        h2
+            inset()
+
+            color: accentPeach
+            font-family: andada
+            font-weight: normal
+
+        h3
+            font-family: andada
+            color: lightTan
+            padding-bottom: 30px
+
+
+.legislator-list
+    vertical-align: top
+    list-style: none
+    width: 30%
+    display: table-cell
+
+    .legislator
+        padding: 25px 15px
+        border-right: 1px solid lightTan
+
+
+        h2
+            font-size: 25px
+
+        &.selected
+            background-color: white
+            border-right: 1px solid white
+            border-left: 1px solid lightTan
+            border-top: 1px solid lightTan
+            border-bottom: 1px solid lightTan
+
+
+
+
+    h2, h4
+        display: inline-block
+
+    h2, p
+        margin: 0
+        padding: 0
+
+    h4
+        color: primaryTan
+        font-size: 25px
+        padding: 0
+
+    h5
+        margin-top: 0
+
+    p
+        font-size: 20px
+
+    button
+        background-color: accentGreen
+        border-radius: 5px
+        border: 1px solid #ddd
+        color: white
+        font-size: 20px
+        height: 40px
+        margin: 0
+        padding: 0
+        width: 140px
+
+    div
+        vertical-align: top
+        display: inline-block
+
+
+.legislator-detail
+    vertical-align: top
+    background-color: white
+    width: 70%
+    display: table-cell
+    height: 50px
+    // border-bottom: 1px solid lightTan
+    // border-right: 1px solid lightTan
+    // border-top: 1px solid lightTan
+
+
+
+
+
+
+
+

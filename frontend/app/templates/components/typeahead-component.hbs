@@ -1,0 +1,8 @@
+{{input type="text" placeholder="Enter Address or Zipcode" valueBinding="value"}}
+{{#if options.content.isLoaded}}
+	<ul class="typeahead-results">
+		{{#each displayOptions}}
+			{{#view "typeahead-option" value=value}}<span>{{displayName}}</span>{{/view}}
+		{{/each}}
+	</ul>
+{{/if}}
