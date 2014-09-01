@@ -1,5 +1,6 @@
 // Helpers for the Congress API
 // https://sunlightlabs.github.io/congress/index.html
+
 var request =       require('request'),
     queryString =   require('querystring');
 
@@ -42,7 +43,6 @@ exports.makeRequest = function( res, endpoint, options ){
 };
 
 exports.createOptions = function( req, res, idKey, endpointOverride ){
-    console.log(req.path);
     var params      = req.path.split('/'),
         endpoint    = endpointOverride || params[2],
         id          = params[3],
