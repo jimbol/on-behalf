@@ -1,34 +1,17 @@
-var legislator = require('../../controllers/legislator');
-
-function getResStub(){
-    return {
-        setHeader: function(){},
-        send: function(){}
-    };
-}
-
-function getReqStub(){
-    return {
-        query: {},
-        path: '/api/legislators'
-    };
-}
-
-function onSend( res, callback ){
-    res.send = callback;
-}
+var legislator = require('../../controllers/legislator'),
+    helpers = require('../test-helpers');
 
 describe('controllers/legislator', function () {
     var req,
         res;
 
     beforeEach(function(){
-        req = getReqStub();
-        res = getResStub();
+        req = helpers.getReqStub();
+        res = helpers.getResStub();
     });
 
     it('should return all legislators', function (done) {
-        onSend( res, function( result ){
+        helpers.onSend( res, function( result ){
             result = JSON.parse( result );
             expect( result.legislators.length ).toBeGreaterThan(3);
             done();
@@ -43,7 +26,7 @@ describe('controllers/legislator', function () {
             longitude: -87.7033310
         };
 
-        onSend( res, function( result ){
+        helpers.onSend( res, function( result ){
             result = JSON.parse( result );
             expect( result.legislators.length ).toBe(3);
             done();
@@ -57,7 +40,7 @@ describe('controllers/legislator', function () {
             address: 60647
         };
 
-        onSend( res, function( result ){
+        helpers.onSend( res, function( result ){
             var query = req.query;
 
             expect( query.address ).toBeUndefined();
@@ -70,5 +53,17 @@ describe('controllers/legislator', function () {
         });
 
         legislator.get( req, res );
+    });
+
+    it('should return single legislator for id', function (done) {
+        req.path += '/K000360';
+
+        helpers.onSend( res, function( result ){
+            result = JSON.parse( result );
+            expect( result.legislators.length ).toBe(1);
+            done();
+        });
+
+        legislator.get( req, res, 'bioguide_id' );
     });
 });

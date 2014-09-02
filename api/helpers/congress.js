@@ -19,7 +19,7 @@ var onRequestSuccess = function ( res, endpoint, body ) {
     res.send( JSON.stringify(responseData) );
 };
 
-var createRequestOptions = function( req, endpoint ){
+var createHashOptions = function( req, endpoint ){
     var query = queryString.stringify( req.query ),
         options = {
             url: 'https://congress.api.sunlightfoundation.com/' + endpoint,
@@ -34,23 +34,28 @@ var createRequestOptions = function( req, endpoint ){
     return options;
 };
 
+exports.createOptions = function( req, res, idKey, endpointOverride ){
+    // endpointOverride gets passed when the sunlight
+    // endpoint differs from the route name
+
+    var params      = req.path.split('/'),
+        endpoint    = endpointOverride || params[2],
+        id          = params[3],
+        options;
+
+    if ( id && idKey ) {
+        req.query[ idKey ] = id;
+    }
+
+    options = createHashOptions( req, endpoint );
+
+    return options;
+};
+
 exports.makeRequest = function( res, endpoint, options ){
     request( options, function ( error, response, body ){
         if (!error && response.statusCode == 200) {
             onRequestSuccess( res, endpoint, body );
         }
     });
-};
-
-exports.createOptions = function( req, res, idKey, endpointOverride ){
-    var params      = req.path.split('/'),
-        endpoint    = endpointOverride || params[2],
-        id          = params[3],
-        options     = createRequestOptions( req, endpoint );
-
-    if ( id && idKey ) {
-        req.query[ idKey ] = id;
-    }
-
-    return options;
 };

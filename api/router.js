@@ -127,43 +127,6 @@ exports.define = function(app){
 // });
 
 
-
-// app.get('/api/legislators*', function(req, res) {
-
-// 	if(req.query.latitude && req.query.longitude){
-// 		// To locate use Coords primarily
-
-// 		// Use the locate api in Sunlight
-// 		makeRequest(res, 'legislators', createOptions(req, res, 'bioguide_id', 'legislators/locate'));
-
-// 	}else if(req.query.address){
-// 		// If there is an address, find the coords based on that
-// 		// address before making query
-
-// 		// Make the location request
-// 		geocoder.geocode(req.query.address, function ( err, data ) {
-
-// 			// Get coords
-// 			var coords = data.results[0].geometry.location;
-
-// 			// Add cords to query
-// 			req.query.latitude = coords.lat;
-// 			req.query.longitude = coords.lng;
-
-// 			// Remove address, its no longer needed
-// 			delete req.query.address;
-
-// 			makeRequest(res, 'legislators', createOptions(req, res, 'bioguide_id', 'legislators/locate'));
-// 		});
-
-// 	} else {
-// 		// No address?  Handle it normally
-// 		makeRequest(res, 'legislators', createOptions(req, res, 'bioguide_id'));
-// 	}
-// });
-
-
-
 // app.get('/api/contributors*', function(req, res) {
 
 // 	if(req.query.bioguide_id){
@@ -192,21 +155,4 @@ exports.define = function(app){
 
 // 		})
 // 	}
-// });
-
-
-
-// //Wildcard route
-// app.get('/api/*', function(req, res) {
-// 	var endpoint = req.path.split('/')[2];
-// 	makeRequest(res, endpoint, createOptions(req, res));
-// });
-
-
-
-
-// // Set up port
-// // ========================================================
-// var server = app.listen(3000, function() {
-// 	console.log(' - Listen to port ' + server.address().port);
 // });

@@ -19,7 +19,13 @@ exports.get = function(req, res) {
 
 
 function getByCoods( req, res ){
-    var options = congressHelper.createOptions( req, res, 'bioguide_id', 'legislators/locate' );
+    var options = congressHelper.createOptions(
+        req,
+        res,
+        'bioguide_id',
+        'legislators/locate'
+    );
+
     congressHelper.makeRequest( res, 'legislators', options );
 }
 
@@ -40,6 +46,11 @@ function onGetCoordsForAddress( err, data, req, res ){
 }
 
 function getAll( req, res ){
-    var options = congressHelper.createOptions( req, res, 'bioguide_id' );
+    var options = congressHelper.createOptions(
+        req,
+        res,
+        'bioguide_id'
+    );
+
     congressHelper.makeRequest( res, 'legislators', options );
 }
