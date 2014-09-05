@@ -1,7 +1,7 @@
 <section>
     <div class="search">
         <h1>Who represents me?</h1>
-        <input type="text" placeholder="Enter your zipcode">
+        {{input action="actionSearch" placeholder="Enter your zipcode" value=addressValue}}
     </div>
 </section>
 
@@ -9,47 +9,9 @@
     <div class="row">
         <div class="colum">
             <ul class="legislator-list">
-                <li class="legislator">
-
-                    <h2>Mark Steven Kirk</h2>
-                    <h4>Senate</h4>
-
-                    <div>
-                        <p>
-                            Has recieved <strong>$3,506,200</strong> in campaign contributions.
-                        </p>
-                    </div>
-
-
-                </li>
-
-                <li class="legislator selected">
-
-                    <h2>Mark Steven Kirk</h2>
-                    <h4>Senate</h4>
-
-                    <div>
-                        <p>
-                            Has recieved <strong>$3,506,200</strong> in campaign contributions.
-                        </p>
-                    </div>
-
-
-                </li>
-
-                <li class="legislator">
-
-                    <h2>Mark Steven Kirk</h2>
-                    <h4>Senate</h4>
-
-                    <div>
-                        <p>
-                            Has recieved <strong>$3,506,200</strong> in campaign contributions.
-                        </p>
-                    </div>
-
-
-                </li>
+                {{#each legislator in results}}
+                    {{legislator-list-item legislator=legislator}}
+                {{/each}}
             </ul
             ><div class="legislator-detail">
 

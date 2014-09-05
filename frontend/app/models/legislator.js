@@ -1,7 +1,7 @@
 // Legislator
-var attr 		= DS.attr,
-	hasMany 	= DS.hasMany,
-	belongsTo 	= DS.belongsTo;
+import DS from 'ember-data';
+
+var attr 		= DS.attr;
 
 var Legislator = DS.Model.extend({
 	birthday:  		attr('string'),
@@ -15,9 +15,6 @@ var Legislator = DS.Model.extend({
 			bioguide_id: this.get('id')
 		});
 	}.property('isLoaded')
-
-
-
 });
 
 export default Legislator;

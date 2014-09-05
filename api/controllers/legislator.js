@@ -21,12 +21,13 @@ exports.get = function(req, res) {
 function getByCoods( req, res ){
     var options = congressHelper.createOptions(
         req,
-        res,
         'bioguide_id',
         'legislators/locate'
     );
 
-    congressHelper.makeRequest( res, 'legislators', options );
+    congressHelper.makeRequest( 'legislators', options, function( response ){
+        respond( response, res );
+    });
 }
 
 function getByAddress( req, res, address ){
@@ -48,9 +49,18 @@ function onGetCoordsForAddress( err, data, req, res ){
 function getAll( req, res ){
     var options = congressHelper.createOptions(
         req,
-        res,
         'bioguide_id'
     );
 
-    congressHelper.makeRequest( res, 'legislators', options );
+    congressHelper.makeRequest( 'legislators', options, function( response ){
+        respond( response, res );
+    });
 }
+
+function respond( response, res ){
+    res.setHeader( 'Access-Control-Allow-Origin', 'http://0.0.0.0:4200' );
+    res.send( JSON.stringify( response ) );
+}
+
+
+

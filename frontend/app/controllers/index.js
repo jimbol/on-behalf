@@ -1,8 +1,10 @@
+import Ember from 'ember';
+
 export default Ember.Controller.extend({
-	
+
 	// Attributes
 	results: [],
-	addressValue: '',
+	addressValue: null,
 
 	// Events
 	actions: {
@@ -10,10 +12,6 @@ export default Ember.Controller.extend({
 			this.set('results', this.store.find('legislator', {
 				address: this.get('addressValue')
 			}));
-		},
-
-		actionSelect: function(){
-			// Select a congress person
 		}
 	}
 });

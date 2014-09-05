@@ -1,4 +1,6 @@
 // Location
+import DS from 'ember-data';
+
 var attr 		= DS.attr;
 
 var Location = DS.Model.extend({

@@ -9,14 +9,16 @@ var headers = {
     'X-APIKEY': '66603c029b1b49428da28d6a783f795e'
 };
 
-var onRequestSuccess = function ( res, endpoint, body ) {
+var formatResponse = function ( endpoint, body ) {
     var data = JSON.parse( body ),
         responseData = {};
 
     responseData[endpoint] = data.results;
 
-    res.setHeader( 'Access-Control-Allow-Origin', 'http://0.0.0.0:4200' );
-    res.send( JSON.stringify(responseData) );
+    return responseData;
+
+    // res.setHeader( 'Access-Control-Allow-Origin', 'http://0.0.0.0:4200' );
+    // res.send( JSON.stringify(responseData) );
 };
 
 var createHashOptions = function( req, endpoint ){
@@ -34,7 +36,7 @@ var createHashOptions = function( req, endpoint ){
     return options;
 };
 
-exports.createOptions = function( req, res, idKey, endpointOverride ){
+exports.createOptions = function( req, idKey, endpointOverride ){
     // endpointOverride gets passed when the sunlight
     // endpoint differs from the route name
 
@@ -52,10 +54,11 @@ exports.createOptions = function( req, res, idKey, endpointOverride ){
     return options;
 };
 
-exports.makeRequest = function( res, endpoint, options ){
+exports.makeRequest = function( endpoint, options, callback ){
     request( options, function ( error, response, body ){
         if (!error && response.statusCode == 200) {
-            onRequestSuccess( res, endpoint, body );
+            var responseData = formatResponse( endpoint, body );
+            callback( responseData );
         }
     });
 };
