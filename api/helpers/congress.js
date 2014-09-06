@@ -1,15 +1,23 @@
 // Helpers for the Congress API
 // https://sunlightlabs.github.io/congress/index.html
-
 var request =       require('request'),
     queryString =   require('querystring');
 
-var headers = {
+// Constructor
+function Congress(){
+    this.endpointOverride = null;
+}
+
+
+// Properties
+Congress.prototype.headers = {
     'content-type': 'application/json; charset=UTF-8',
     'X-APIKEY': '66603c029b1b49428da28d6a783f795e'
 };
 
-var formatResponse = function ( endpoint, body ) {
+
+// Methods
+Congress.prototype.formatResponse = function ( endpoint, body ) {
     var data = JSON.parse( body ),
         responseData = {};
 
@@ -21,12 +29,12 @@ var formatResponse = function ( endpoint, body ) {
     // res.send( JSON.stringify(responseData) );
 };
 
-var createHashOptions = function( req, endpoint ){
-    var query = queryString.stringify( req.query ),
+Congress.prototype.createHashOptions = function( endpoint ){
+    var query = queryString.stringify( this.req.query ),
         options = {
             url: 'https://congress.api.sunlightfoundation.com/' + endpoint,
             method: 'GET',
-            headers: headers
+            headers: this.headers
         };
 
     if ( query ) {
@@ -36,12 +44,11 @@ var createHashOptions = function( req, endpoint ){
     return options;
 };
 
-exports.createOptions = function( req, idKey, endpointOverride ){
-    // endpointOverride gets passed when the sunlight
-    // endpoint differs from the route name
+Congress.prototype.createOptions = function( idKey ){
 
-    var params      = req.path.split('/'),
-        endpoint    = endpointOverride || params[2],
+    var req = this.req,
+        params      = req.path.split('/'),
+        endpoint    = this.endpointOverride || params[2],
         id          = params[3],
         options;
 
@@ -49,16 +56,22 @@ exports.createOptions = function( req, idKey, endpointOverride ){
         req.query[ idKey ] = id;
     }
 
-    options = createHashOptions( req, endpoint );
+    options = this.createHashOptions( endpoint );
 
     return options;
 };
 
-exports.makeRequest = function( endpoint, options, callback ){
+Congress.prototype.makeRequest = function( endpoint, options, callback, context ){
+    var _this = context || this;
+
     request( options, function ( error, response, body ){
+
         if (!error && response.statusCode == 200) {
-            var responseData = formatResponse( endpoint, body );
-            callback( responseData );
+            var responseData = _this.formatResponse( endpoint, body );
+            callback.call( _this, responseData );
         }
+
     });
 };
+
+module.exports = Congress;

@@ -1,66 +1,69 @@
 // Legislator methods
-
 var geocoder =      require('geocoder'),
     request =       require('request'),
     querystring =   require('querystring'),
-    congressHelper = require('../helpers/congress');
+    Congress =      require('../helpers/congress');
 
-exports.get = function(req, res) {
-    var query = req.query;
-
-    if ( query.latitude && query.longitude ) {
-        getByCoods( req, res );
-    } else if ( query.address ){
-        getByAddress( req, res, query.address );
-    } else {
-        getAll( req, res );
-    }
+// Constructor
+var Legislator = function(req, res){
+    this.req = req;
+    this.res = res;
 };
 
+Legislator.prototype = new Congress();
 
-function getByCoods( req, res ){
-    var options = congressHelper.createOptions(
-        req,
-        'bioguide_id',
-        'legislators/locate'
-    );
 
-    congressHelper.makeRequest( 'legislators', options, function( response ){
-        respond( response, res );
-    });
-}
+// Methods
+Legislator.prototype.getByCoods = function (){
+    this.endpointOverride = 'legislators/locate';
+    var options = this.createOptions( 'bioguide_id' );
 
-function getByAddress( req, res, address ){
+    this.makeRequest( 'legislators', options, this.respond, this);
+};
+
+Legislator.prototype.getByAddress = function ( address ){
+    var _this = this;
     geocoder.geocode( address, function( err, data ){
-        onGetCoordsForAddress( err, data, req, res );
+        _this.onGetCoordsForAddress( err, data );
     });
-}
+};
 
-function onGetCoordsForAddress( err, data, req, res ){
-    var coords = data.results[0].geometry.location;
+Legislator.prototype.onGetCoordsForAddress = function ( err, data ){
+    var coords = data.results[0].geometry.location,
+        req = this.req;
 
     req.query.latitude = coords.lat;
     req.query.longitude = coords.lng;
     delete req.query.address;
 
-    getByCoods( req, res );
-}
+    this.getByCoods();
+};
 
-function getAll( req, res ){
-    var options = congressHelper.createOptions(
-        req,
-        'bioguide_id'
-    );
-
-    congressHelper.makeRequest( 'legislators', options, function( response ){
-        respond( response, res );
-    });
-}
-
-function respond( response, res ){
+Legislator.prototype.respond = function ( response ){
+    var res = this.res;
     res.setHeader( 'Access-Control-Allow-Origin', 'http://0.0.0.0:4200' );
     res.send( JSON.stringify( response ) );
-}
+};
+
+Legislator.prototype.get = function() {
+    var query = this.req.query;
+
+    if ( query.latitude && query.longitude ) {
+        this.getByCoods();
+    } else if ( query.address ){
+        this.getByAddress( query.address );
+    } else {
+        this.getAll();
+    }
+};
+
+Legislator.prototype.getAll = function (){
+
+    var _this = this,
+        options = this.createOptions( 'bioguide_id' );
+
+    this.makeRequest( 'legislators', options, this.respond , this);
+};
 
 
-
+module.exports = Legislator;

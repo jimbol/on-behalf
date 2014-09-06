@@ -12,14 +12,17 @@ var express = 		require('express'),
 	request = 		require('request'),
 	http = 			require('http'),
 	querystring = 	require('querystring'),
-	app = 			express();
+	Legislator = 	require('./controllers/legislator');
 
-var legislator = require('./controllers/legislator');
+var app = express();
 
 
 exports.define = function(app){
 
-	app.get('/api/legislator*', legislator.get);
+	app.get('/api/legislator*', function(req, res){
+		var legislator = new Legislator( req, res );
+		legislator.get();
+	});
 
 	// Wildcard
 	app.get('/*', function(req, res) {
