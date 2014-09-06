@@ -2,6 +2,8 @@
 var geocoder =      require('geocoder'),
     request =       require('request'),
     querystring =   require('querystring'),
+    async =         require('async'),
+    entity =        require('./entity'),
     Congress =      require('../helpers/congress');
 
 // Constructor
@@ -15,6 +17,7 @@ Legislator.prototype = new Congress();
 
 // Methods
 Legislator.prototype.getByCoods = function (){
+
     this.endpointOverride = 'legislators/locate';
     var options = this.createOptions( 'bioguide_id' );
 
@@ -22,6 +25,7 @@ Legislator.prototype.getByCoods = function (){
 };
 
 Legislator.prototype.getByAddress = function ( address ){
+
     var _this = this;
     geocoder.geocode( address, function( err, data ){
         _this.onGetCoordsForAddress( err, data );
@@ -29,6 +33,7 @@ Legislator.prototype.getByAddress = function ( address ){
 };
 
 Legislator.prototype.onGetCoordsForAddress = function ( err, data ){
+
     var coords = data.results[0].geometry.location,
         req = this.req;
 
@@ -40,12 +45,15 @@ Legislator.prototype.onGetCoordsForAddress = function ( err, data ){
 };
 
 Legislator.prototype.respond = function ( response ){
+
     var res = this.res;
+
     res.setHeader( 'Access-Control-Allow-Origin', 'http://0.0.0.0:4200' );
     res.send( JSON.stringify( response ) );
 };
 
 Legislator.prototype.get = function() {
+
     var query = this.req.query;
 
     if ( query.latitude && query.longitude ) {
@@ -64,6 +72,28 @@ Legislator.prototype.getAll = function (){
 
     this.makeRequest( 'legislators', options, this.respond , this);
 };
+
+Legislator.prototype.parseResults = function( results, callback ){
+    var queries = [];
+
+    results.map( function( legislator ){
+        queries.push( function( onFinish ){
+
+            entity.get( legislator.bioguide_id, function( entityId ){
+
+                legislator.entityId = entityId;
+                onFinish();
+
+            });
+
+        });
+    });
+
+    async.parallel( queries, function(){
+        callback( results );
+    });
+};
+
 
 
 module.exports = Legislator;

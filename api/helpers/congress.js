@@ -17,16 +17,20 @@ Congress.prototype.headers = {
 
 
 // Methods
-Congress.prototype.formatResponse = function ( endpoint, body ) {
-    var data = JSON.parse( body ),
-        responseData = {};
+Congress.prototype.formatResponse = function ( endpoint, body, callback ) {
+    var data = JSON.parse( body );
 
-    responseData[endpoint] = data.results;
+    this.parseResults( data.results, function( parsedResults ){
+        var responseData = {};
+        responseData[endpoint] = parsedResults;
 
-    return responseData;
+        callback( responseData );
+    });
+};
 
-    // res.setHeader( 'Access-Control-Allow-Origin', 'http://0.0.0.0:4200' );
-    // res.send( JSON.stringify(responseData) );
+Congress.prototype.parseResults = function ( results ){
+    // This will get over written i9n a controller
+    return results;
 };
 
 Congress.prototype.createHashOptions = function( endpoint ){
@@ -67,8 +71,14 @@ Congress.prototype.makeRequest = function( endpoint, options, callback, context 
     request( options, function ( error, response, body ){
 
         if (!error && response.statusCode == 200) {
-            var responseData = _this.formatResponse( endpoint, body );
-            callback.call( _this, responseData );
+            _this.formatResponse(
+                endpoint,
+                body,
+                function( responseData ){
+                    debugger;
+                    callback.call( _this, responseData );
+                }
+            );
         }
 
     });

@@ -3,6 +3,7 @@
   "dependencies": {
   	"express": "~3.4.8",
   	"request": "*",
-  	"geocoder": "*"
+    "geocoder": "*",
+    "async": "^0.9.0"
   }
 }
