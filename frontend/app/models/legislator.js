@@ -1,7 +1,8 @@
 // Legislator
 import DS from 'ember-data';
 
-var attr 		= DS.attr;
+var attr 	= DS.attr,
+	hasMany = DS.hasMany;
 
 var Legislator = DS.Model.extend({
 	birthday:  		attr('string'),
@@ -10,11 +11,7 @@ var Legislator = DS.Model.extend({
 	chamber: 		attr('string'),
 	party: 			attr('string'),
 
-	contributors: 	function(){
-		return this.store.find('contributor', {
-			bioguide_id: this.get('id')
-		});
-	}.property('isLoaded')
+	contributors: 	hasMany('contributor')
 });
 
 export default Legislator;

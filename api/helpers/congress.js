@@ -17,22 +17,6 @@ Congress.prototype.headers = {
 
 
 // Methods
-Congress.prototype.formatResponse = function ( endpoint, body, callback ) {
-    var data = JSON.parse( body );
-
-    this.parseResults( data.results, function( parsedResults ){
-        var responseData = {};
-        responseData[endpoint] = parsedResults;
-
-        callback( responseData );
-    });
-};
-
-Congress.prototype.parseResults = function ( results ){
-    // This will get over written i9n a controller
-    return results;
-};
-
 Congress.prototype.createHashOptions = function( endpoint ){
     var query = queryString.stringify( this.req.query ),
         options = {
@@ -75,13 +59,28 @@ Congress.prototype.makeRequest = function( endpoint, options, callback, context 
                 endpoint,
                 body,
                 function( responseData ){
-                    debugger;
                     callback.call( _this, responseData );
                 }
             );
         }
 
     });
+};
+
+Congress.prototype.formatResponse = function ( endpoint, body, callback ) {
+    var data = JSON.parse( body );
+
+    this.parseResults( data.results, function( parsedResults ){
+        var responseData = {};
+        responseData[endpoint] = parsedResults;
+
+        callback( responseData );
+    });
+};
+
+Congress.prototype.parseResults = function ( results ){
+    // This will get over written i9n a controller
+    return results;
 };
 
 module.exports = Congress;
