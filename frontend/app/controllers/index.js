@@ -10,6 +10,10 @@ export default Ember.Controller.extend({
 		return this.get('legislators').findBy('isSelected', true);
 	}.property('legislators.@each.isSelected'),
 
+	isLoading: function(){
+		return this.get('legislators') && !this.get('legislators.isFulfilled');
+	}.property('legislators.isFulfilled'),
+
 	// Events
 	actions: {
 		actionSearch: function(){

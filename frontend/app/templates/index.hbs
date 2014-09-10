@@ -5,6 +5,13 @@
     </div>
 </section>
 
+{{#if isLoading}}
+    <section class="main-content">
+        <div class="row">
+        loading
+        </div>
+    </section>
+{{/if}}
 {{#if legislators}}
     <section class="main-content">
         <div class="row">

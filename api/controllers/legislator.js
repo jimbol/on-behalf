@@ -99,18 +99,6 @@ Legislator.prototype.find = function (){
     });
 };
 
-Legislator.prototype.getEntities = function( legislator, callback ){
-
-    var entity = new EntityModel();
-
-    entity.findId({
-        bioguide_id: legislator.bioguide_id
-    }, function( entityId ){
-        legislator.entityId = entityId;
-        callback();
-    });
-};
-
 
 // TODO Clean this shit up!
 Legislator.prototype.getDependencies = function( responseData, callback ){
@@ -128,43 +116,15 @@ Legislator.prototype.getDependencies = function( responseData, callback ){
 
             async.series([
                 function( callback ){
-                    _this.getEntities( legislator, callback );
+                    _this.getEntityId( legislator, callback );
                 },
                 function( callback ){
                     async.parallel([
-                        function(innerCallback){
-                            var contributor = new ContributorModel();
-
-                            contributor.findById({
-                                id: legislator.entityId,
-                                cycle: 2012,
-                                limit: 7
-                            }, function( response ){
-
-                                contributors = contributors.concat( response.contributors );
-
-                                response.contributors.map( function( item ){
-                                    legislator.contributors.push( item.id );
-                                });
-                                innerCallback();
-                            });
+                        function( innerCallback ){
+                            _this.getContributor( legislator, innerCallback );
                         },
-                        function(innerCallback){
-                            var industry = new IndustryModel();
-
-                            industry.findById({
-                                id: legislator.entityId,
-                                cycle: 2014,
-                                limit: 7
-                            }, function( response ){
-
-                                industries = industries.concat( response.industries );
-
-                                response.industries.map( function( item ){
-                                    legislator.industries.push( item.id );
-                                });
-                                innerCallback();
-                            });
+                        function( innerCallback ){
+                            _this.getIndustry( legislator, innerCallback );
                         }
                     ], function(){
                         callback();
@@ -182,6 +142,56 @@ Legislator.prototype.getDependencies = function( responseData, callback ){
         responseData.contributors = contributors;
         responseData.industries = industries;
         callback( responseData, callback );
+    });
+};
+
+Legislator.prototype.getEntityId = function( legislator, callback ){
+
+    var entity = new EntityModel();
+
+    entity.findId({
+        bioguide_id: legislator.bioguide_id
+    }, function( entityId ){
+        legislator.entityId = entityId;
+        callback();
+    });
+};
+
+Legislator.prototype.getContributor = function( legislator, callback ){
+    var contributor = new ContributorModel();
+
+    contributor.findById({
+        id: legislator.entityId,
+        cycle: 2012,
+        limit: 7
+    }, function( response ){
+
+        contributors = contributors.concat( response.contributors );
+
+        response.contributors.map( function( item ){
+            legislator.contributors.push( item.id );
+        });
+
+        callback();
+    });
+};
+
+Legislator.prototype.getIndustry = function( legislator, callback ){
+    var industry = new IndustryModel();
+
+    industry.findById({
+        id: legislator.entityId,
+        cycle: 2014,
+        limit: 7
+    }, function( response ){
+
+        industries = industries.concat( response.industries );
+
+        response.industries.map( function( item ){
+            legislator.industries.push( item.id );
+        });
+
+        callback();
     });
 };
 
