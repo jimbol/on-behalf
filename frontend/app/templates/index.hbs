@@ -5,17 +5,42 @@
     </div>
 </section>
 
-<section class="main-content">
-    <div class="row">
-        <div class="colum">
-            <ul class="legislator-list">
-                {{#each legislator in results}}
-                    {{legislator-list-item legislator=legislator}}
-                {{/each}}
-            </ul
-            ><div class="legislator-detail">
-
+{{#if legislators}}
+    <section class="main-content">
+        <div class="row">
+            <div class="colum">
+                <ul class="legislator-list">
+                    {{#each legislator in legislators}}
+                        {{legislator-list-item action="actionClearSelection" legislator=legislator}}
+                    {{/each}}
+                </ul
+                ><div class="legislator-detail">
+                    <h2>{{selectedRep.fullName}}</h2>
+                    <p>
+                        <strong>{{selectedRep.fullTitle}}</strong>
+                    </p>
+                    <div class="colum">
+                        <h4>Top Contributors</h4>
+                        <ul>
+                            {{#each selectedRep.contributors}}
+                                <li>
+                                    <strong>{{name}}</strong> - <em>${{total_amount}}</em>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div
+                    ><div class="colum">
+                        <h4>Top Contributing Industries</h4>
+                        <ul>
+                            {{#each selectedRep.industries}}
+                                <li>
+                                    <strong>{{displayName}}</strong> - <em>${{amount}}</em>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+{{/if}}

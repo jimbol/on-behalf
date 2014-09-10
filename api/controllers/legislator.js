@@ -4,9 +4,10 @@ var geocoder =      require('geocoder'),
     querystring =   require('querystring'),
     async =         require('async'),
 
-    LegislatorModel =  require('../models/legislator'),
-    ContributorModel = require('../models/contributor'),
-    EntityModel =      require('../models/entity');
+    LegislatorModel =   require('../models/legislator'),
+    ContributorModel =  require('../models/contributor'),
+    IndustryModel =     require('../models/industry'),
+    EntityModel =       require('../models/entity');
 
 // Constructor
 var Legislator = function(req, res){
@@ -23,7 +24,13 @@ Legislator.prototype.get = function() {
     } else if ( query.address ){
         this.findByAddress( query.address );
     } else {
-        this.find();
+        this.find({}, function( legislators ){
+
+            _this.getDependencies( legislators, function( resBody ){
+                _this.respond( resBody );
+            });
+
+        });
     }
 };
 
@@ -37,9 +44,12 @@ Legislator.prototype.findByCoods = function (){
     legislator.find({
         latitude: req.query.latitude,
         longitude: req.query.longitude
-    }, function( responseData ){
+    }, function( legislators ){
 
-        _this.respond( responseData );
+        _this.getDependencies( legislators, function( resBody ){
+            _this.respond( resBody );
+        });
+
     });
 };
 
@@ -89,47 +99,74 @@ Legislator.prototype.find = function (){
     });
 };
 
+Legislator.prototype.getEntities = function( legislator, callback ){
+
+    var entity = new EntityModel();
+
+    entity.findId({
+        bioguide_id: legislator.bioguide_id
+    }, function( entityId ){
+        legislator.entityId = entityId;
+        callback();
+    });
+};
+
+
+// TODO Clean this shit up!
 Legislator.prototype.getDependencies = function( responseData, callback ){
     var queries = [],
         contributors = [],
+        industries = [],
         _this = this;
 
     responseData.legislators.map( function( legislator ){
 
         legislator.contributors = [];
+        legislator.industries = [];
 
         queries.push( function( onFinish ){
 
             async.series([
-
                 function( callback ){
-
-                    var entity = new EntityModel();
-
-                    entity.findId({
-                        bioguide_id: legislator.bioguide_id
-                    }, function( entityId ){
-                        legislator.entityId = entityId;
-                        callback();
-                    });
+                    _this.getEntities( legislator, callback );
                 },
+                function( callback ){
+                    async.parallel([
+                        function(innerCallback){
+                            var contributor = new ContributorModel();
 
-                function(callback){
+                            contributor.findById({
+                                id: legislator.entityId,
+                                cycle: 2012,
+                                limit: 7
+                            }, function( response ){
 
-                    var contributor = new ContributorModel();
+                                contributors = contributors.concat( response.contributors );
 
-                    contributor.findById({
-                        id: legislator.entityId,
-                        cycle: 2012,
-                        limit: 15
-                    }, function( response ){
+                                response.contributors.map( function( item ){
+                                    legislator.contributors.push( item.id );
+                                });
+                                innerCallback();
+                            });
+                        },
+                        function(innerCallback){
+                            var industry = new IndustryModel();
 
-                        contributors = contributors.concat( response.contributors );
+                            industry.findById({
+                                id: legislator.entityId,
+                                cycle: 2014,
+                                limit: 7
+                            }, function( response ){
 
-                        response.contributors.map( function( item ){
-                            legislator.contributors.push( item.id );
-                        });
+                                industries = industries.concat( response.industries );
 
+                                response.industries.map( function( item ){
+                                    legislator.industries.push( item.id );
+                                });
+                                innerCallback();
+                            });
+                        }
+                    ], function(){
                         callback();
                     });
                 }
@@ -143,6 +180,7 @@ Legislator.prototype.getDependencies = function( responseData, callback ){
 
     async.parallel( queries, function(){
         responseData.contributors = contributors;
+        responseData.industries = industries;
         callback( responseData, callback );
     });
 };
