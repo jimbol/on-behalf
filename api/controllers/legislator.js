@@ -14,6 +14,8 @@ var Legislator = function(req, res){
     this.req = req;
     this.res = res;
     this.model = new LegislatorModel();
+    this.contributors = [];
+    this.industries = [];
 };
 
 Legislator.prototype.get = function() {
@@ -53,7 +55,7 @@ Legislator.prototype.findByCoods = function (){
     });
 };
 
-Legislator.prototype.findByAddress = function ( address ){
+Legislator.prototype.findByAddress = function (address){
 
     var _this = this;
     geocoder.geocode( address, function( err, data ){
@@ -61,7 +63,7 @@ Legislator.prototype.findByAddress = function ( address ){
     });
 };
 
-Legislator.prototype.onGetCoordsForAddress = function ( err, data ){
+Legislator.prototype.onGetCoordsForAddress = function (err, data){
 
     var coords = data.results[0].geometry.location,
         req = this.req;
@@ -73,7 +75,7 @@ Legislator.prototype.onGetCoordsForAddress = function ( err, data ){
     this.findByCoods();
 };
 
-Legislator.prototype.respond = function ( response ){
+Legislator.prototype.respond = function (response){
 
     var res = this.res;
 
@@ -99,12 +101,8 @@ Legislator.prototype.find = function (){
     });
 };
 
-
-// TODO Clean this shit up!
-Legislator.prototype.getDependencies = function( responseData, callback ){
+Legislator.prototype.getDependencies = function(responseData, callback){
     var queries = [],
-        contributors = [],
-        industries = [],
         _this = this;
 
     responseData.legislators.map( function( legislator ){
@@ -114,38 +112,30 @@ Legislator.prototype.getDependencies = function( responseData, callback ){
 
         queries.push( function( onFinish ){
 
-            async.series([
-                function( callback ){
-                    _this.getEntityId( legislator, callback );
+            async.auto({
+                getEntity: function(callback){
+                    _this.getEntityId(legislator, callback);
                 },
-                function( callback ){
-                    async.parallel([
-                        function( innerCallback ){
-                            _this.getContributor( legislator, innerCallback );
-                        },
-                        function( innerCallback ){
-                            _this.getIndustry( legislator, innerCallback );
-                        }
-                    ], function(){
-                        callback();
-                    });
-                }
-            ],
-
-            function(err, results){
+                getContributors: ['getEntity', function(callback){
+                    _this.getContributors(legislator, callback);
+                }],
+                getIndustries: ['getEntity', function(callback){
+                    _this.getIndustries(legislator, callback);
+                }]
+            }, function(err, results) {
                 onFinish();
             });
         });
     });
 
     async.parallel( queries, function(){
-        responseData.contributors = contributors;
-        responseData.industries = industries;
+        responseData.contributors = _this.contributors;
+        responseData.industries = _this.industries;
         callback( responseData, callback );
     });
 };
 
-Legislator.prototype.getEntityId = function( legislator, callback ){
+Legislator.prototype.getEntityId = function(legislator, callback){
 
     var entity = new EntityModel();
 
@@ -157,8 +147,10 @@ Legislator.prototype.getEntityId = function( legislator, callback ){
     });
 };
 
-Legislator.prototype.getContributor = function( legislator, callback ){
-    var contributor = new ContributorModel();
+Legislator.prototype.getContributors = function(legislator, callback){
+
+    var contributor = new ContributorModel(),
+        _this = this;
 
     contributor.findById({
         id: legislator.entityId,
@@ -166,33 +158,37 @@ Legislator.prototype.getContributor = function( legislator, callback ){
         limit: 7
     }, function( response ){
 
-        contributors = contributors.concat( response.contributors );
+        _this.contributors = _this.contributors.concat( response.contributors );
 
         response.contributors.map( function( item ){
+            // combine ids to make it unique
+            item.id += legislator.entityId;
             legislator.contributors.push( item.id );
         });
-
         callback();
     });
 };
 
-Legislator.prototype.getIndustry = function( legislator, callback ){
-    var industry = new IndustryModel();
+Legislator.prototype.getIndustries = function(legislator, callback){
+
+    var industry = new IndustryModel(),
+        _this = this;
 
     industry.findById({
         id: legislator.entityId,
-        cycle: 2014,
+        cycle: 2012,
         limit: 7
     }, function( response ){
 
-        industries = industries.concat( response.industries );
+        _this.industries = _this.industries.concat( response.industries );
 
         response.industries.map( function( item ){
+            item.id += legislator.entityId;
             legislator.industries.push( item.id );
         });
-
         callback();
     });
 };
+
 
 module.exports = Legislator;

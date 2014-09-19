@@ -1,0 +1,7 @@
+{
+    "apiKey": "66603c029b1b49428da28d6a783f795e",
+    "urls": {
+        "congress": "https://congress.api.sunlightfoundation.com/",
+        "transparency": "http://transparencydata.com/api/1.0/"
+    }
+}

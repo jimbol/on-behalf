@@ -5,13 +5,6 @@
     </div>
 </section>
 
-{{#if isLoading}}
-    <section class="main-content">
-        <div class="row">
-        loading
-        </div>
-    </section>
-{{/if}}
 {{#if legislators}}
     <section class="main-content">
         <div class="row">
@@ -24,14 +17,14 @@
                 ><div class="legislator-detail">
                     <h2>{{selectedRep.fullName}}</h2>
                     <p>
-                        <strong>{{selectedRep.fullTitle}}</strong>
+                        <strong>{{selectedRep.fullTitle}} ({{selectedRep.party}})</strong>
                     </p>
                     <div class="colum">
                         <h4>Top Contributors</h4>
                         <ul>
                             {{#each selectedRep.contributors}}
                                 <li>
-                                    <strong>{{name}}</strong> - <em>${{total_amount}}</em>
+                                    <strong>{{name}}</strong><em>{{format-dollars total_amount}}</em>
                                 </li>
                             {{/each}}
                         </ul>
@@ -41,7 +34,7 @@
                         <ul>
                             {{#each selectedRep.industries}}
                                 <li>
-                                    <strong>{{displayName}}</strong> - <em>${{amount}}</em>
+                                    <strong>{{displayName}}</strong><em>{{format-dollars amount}}</em>
                                 </li>
                             {{/each}}
                         </ul>

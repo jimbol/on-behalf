@@ -171,6 +171,11 @@ section
         width: calc( 50% - 20px )
         display: inline-block
 
+    @media (max-width: 600px)
+        .colum
+            width: 100%
+            display: block
+
     p strong
         color: primaryTan
         font-size: 25px
@@ -193,10 +198,14 @@ section
         font-size: 20px
 
         li
-            padding-bottom: 8px
+            padding: 8px
 
-        em
-            color: accentGreen
+            &:nth-child(2n)
+                background-color: #E8E7E1
+
+            em
+                float: right
+                color: accentGreen
 
 
 

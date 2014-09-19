@@ -1,11 +1,12 @@
-var Model = require('../models/model');
+var Model = require('../models/model'),
+    config = require('../config');
 
 // Constructor
 function Legislator(){
     this.query = null;
     this.responseKey = 'legislators';
     this.endpoint = 'legislators';
-    this.url = 'https://congress.api.sunlightfoundation.com/';
+    this.url = config.urls.congress;
 }
 
 Legislator.prototype = new Model();

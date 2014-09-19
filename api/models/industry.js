@@ -1,12 +1,13 @@
-var Model = require('../models/model');
+var Model = require('../models/model'),
+    config = require('../config');
 
 // Constructor
 function Industry(){
     this.query = {
-        apikey: '66603c029b1b49428da28d6a783f795e'
+        apikey: config.apiKey
     };
     this.endpoint = '/contributors/industries.json';
-    this.url = 'http://transparencydata.com/api/1.0/aggregates/pol/';
+    this.url = config.urls.transparency + 'aggregates/pol/';
 }
 
 // cycle = 2012

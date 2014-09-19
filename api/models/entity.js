@@ -1,12 +1,13 @@
-var Model = require('../models/model');
+var Model = require('../models/model'),
+    config = require('../config');
 
 // Constructor
 function Entity(){
     this.query = {
-        apikey: '66603c029b1b49428da28d6a783f795e'
+        apikey: config.apiKey
     };
     this.endpoint = 'entities/id_lookup.json';
-    this.url = 'http://transparencydata.com/api/1.0/';
+    this.url = config.urls.transparency;
 }
 
 Entity.prototype = new Model();
