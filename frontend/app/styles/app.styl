@@ -39,6 +39,20 @@ header
             margin-top: 16px
 
 
+h1
+    inset()
+
+    color: primaryTan
+    font-family: andadasc
+    font-size: 90px
+    font-weight: normal
+    padding: 70px 0 35px 0
+
+h4
+    color: primaryTan
+    font-size: 25px
+    padding: 0
+
 section
     padding-bottom: 25px
 
@@ -46,14 +60,8 @@ section
         content()
         text-align: center
 
-        h1
-            inset()
-
-            color: primaryTan
-            font-family: andadasc
-            font-size: 90px
-            font-weight: normal
-            padding: 70px 0 35px 0
+        &.invalid input
+            border-color: accentPeach
 
         input
 
@@ -84,10 +92,23 @@ section
     margin-top: 60px
     min-height: 400px
 
+    small
+        font-size: 15px
+        color: lightTan
+
+        &.numbers
+            display: block
+            text-align: right
+            padding-top: 15px
+
     .row
         content()
         margin-top: 60px
         margin-bottom: 30px
+
+        h1
+            font-size: 60px
+            padding: 0 25px 35px
 
         h2
             inset()
@@ -113,7 +134,7 @@ section
         padding: 15px 25px
         margin-bottom: 5px
         transition: background-color 0.2s
-        border-radius: 5px;
+        border-radius: 5px
 
         h2
             font-size: 25px
@@ -121,8 +142,8 @@ section
 
         &:hover,
         &.selected
-            background-color: #E8E7E1
-            border-radius: 5px;
+            background-color: middleTan
+            border-radius: 5px
 
         &:active
             padding: 17px 25px 13px
@@ -133,11 +154,6 @@ section
 
     h2, p
         margin: 0
-        padding: 0
-
-    h4
-        color: primaryTan
-        font-size: 25px
         padding: 0
 
     h5
@@ -172,14 +188,28 @@ section
         width: calc( 50% - 20px )
         display: inline-block
 
-    p strong
+    h2,
+    h4,
+    h5
+        padding-left: 8px
+
+    p h3
         color: primaryTan
         font-size: 25px
         padding: 0
 
     h4
-        color: primaryTan
-        padding-bottom: 15px;
+        border-bottom: 1px dotted middleTan
+        padding-bottom: 25px
+        margin-bottom: 25px
+
+    h5
+        @inset
+
+        margin: 0
+        color: accentGreen
+        font-size: 20px
+        padding-bottom: 15px
 
     div
         padding-right: 20px
@@ -196,7 +226,7 @@ section
             padding: 8px
 
             &:nth-child(2n)
-                background-color: #E8E7E1
+                background-color: middleTan
 
             strong
                 width: calc( 100% - 100px )
@@ -209,6 +239,11 @@ section
                 color: accentGreen
 
 @media (max-width: 900px)
+
+    .main-content .row h1
+        font-size: 40px
+        text-align: center
+
     .legislator-list
         width: 100%
         padding-bottom: 50px
@@ -230,8 +265,19 @@ section
             padding-bottom: 50px
 
 @media (max-width: 700px)
+    header nav
+        text-align: center
+
+    .search h1
+        font-size: 60px
+
+    .main-content .row h1
+        text-align: center
+
     .legislator-list .legislator
         width: calc(100% - 50px)
+
+
 
 
 

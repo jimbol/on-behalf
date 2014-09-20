@@ -59,7 +59,16 @@ Legislator.prototype.findByAddress = function (address){
 
     var _this = this;
     geocoder.geocode( address, function( err, data ){
+        if (!data.results.length) {
+
+            _this.respond({
+                legislators:[]
+            });
+
+            return;
+        }
         _this.onGetCoordsForAddress( err, data );
+
     });
 };
 
