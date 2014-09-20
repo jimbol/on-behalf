@@ -117,6 +117,7 @@ section
 
         h2
             font-size: 25px
+            display: block
 
         &:hover,
         &.selected
@@ -171,11 +172,6 @@ section
         width: calc( 50% - 20px )
         display: inline-block
 
-    @media (max-width: 600px)
-        .colum
-            width: 100%
-            display: block
-
     p strong
         color: primaryTan
         font-size: 25px
@@ -189,7 +185,6 @@ section
         padding-right: 20px
         position: relative
         height: auto
-        min-height: 500px
 
     ul
         padding: 0
@@ -203,13 +198,40 @@ section
             &:nth-child(2n)
                 background-color: #E8E7E1
 
+            strong
+                width: calc( 100% - 100px )
+                overflow: hidden
+                display: inline-block
+                height: 24px
+
             em
                 float: right
                 color: accentGreen
 
+@media (max-width: 900px)
+    .legislator-list
+        width: 100%
+        padding-bottom: 50px
+        border-bottom: 1px solid #ddd
 
 
+        .legislator
+            display: inline-block
+            width: calc(30% - 32px)
 
+
+    .legislator-detail
+        width: 100%
+        padding-top: 50px
+
+        .colum
+            width: 100%
+            display: block
+            padding-bottom: 50px
+
+@media (max-width: 700px)
+    .legislator-list .legislator
+        width: calc(100% - 50px)
 
 
 
