@@ -107,6 +107,7 @@ section
         margin-bottom: 30px
 
         h1
+            text-align: center
             font-size: 60px
             padding: 0 25px 35px
 
@@ -122,6 +123,8 @@ section
             color: lightTan
             padding-bottom: 30px
 
+        p
+            font-size: 20px
 
 .legislator-list
     vertical-align: top
@@ -132,22 +135,26 @@ section
 
     .legislator
         padding: 15px 25px
-        margin-bottom: 5px
         transition: background-color 0.2s
-        border-radius: 5px
+        border-radius: 10px 10px 0 0
+        cursor: pointer
 
         h2
             font-size: 25px
             display: block
 
-        &:hover,
+        &:hover
+            margin-top: -2px
+            background-color: lighterTan
+            border-bottom: 2px solid lightTan
+
         &.selected
             background-color: middleTan
-            border-radius: 5px
 
         &:active
-            padding: 17px 25px 13px
-            background-color: white
+            background-color: middleTan
+            border-bottom: 0px
+            margin-top: 0px
 
     h2, h4
         display: inline-block
@@ -158,9 +165,6 @@ section
 
     h5
         margin-top: 0
-
-    p
-        font-size: 20px
 
     button
         background-color: accentGreen
@@ -177,16 +181,17 @@ section
         vertical-align: top
         display: inline-block
 
+.about,
+.legislator-detail
+    .colum
+        vertical-align: top
+        width: calc( 50% - 20px )
+        display: inline-block
 
 .legislator-detail
     vertical-align: top
     width: 70%
     display: inline-block
-
-    .colum
-        vertical-align: top
-        width: calc( 50% - 20px )
-        display: inline-block
 
     h2,
     h4,
@@ -207,7 +212,7 @@ section
         @inset
 
         margin: 0
-        color: accentGreen
+        color: accentPeach
         font-size: 20px
         padding-bottom: 15px
 
@@ -236,9 +241,9 @@ section
 
             em
                 float: right
-                color: accentGreen
+                color: accentPeach
 
-@media (max-width: 900px)
+@media (max-width: 2000px)
 
     .main-content .row h1
         font-size: 40px
@@ -246,7 +251,6 @@ section
 
     .legislator-list
         width: 100%
-        padding-bottom: 50px
         border-bottom: 1px solid #ddd
 
 
@@ -257,11 +261,11 @@ section
 
     .legislator-detail
         width: 100%
-        padding-top: 50px
+        padding-top: 25px
 
         .colum
-            width: 100%
-            display: block
+            width: calc(50% - 20px)
+            display: inline-block
             padding-bottom: 50px
 
 @media (max-width: 700px)

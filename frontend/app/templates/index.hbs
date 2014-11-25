@@ -24,9 +24,7 @@
                     </ul
                     ><div class="legislator-detail">
                         <h2>{{selectedRep.fullName}}</h2>
-                        <p>
-                            <h4>{{selectedRep.fullTitle}} ({{selectedRep.party}})</h4>
-                        </p>
+                        <p><h4>{{selectedRep.fullTitle}} ({{selectedRep.party}})</h4></p>
                         <div class="colum">
                             <h5>Top Contributors</h5>
                             <ul>
@@ -48,9 +46,32 @@
                             </ul>
                         </div>
                     </div>
-                    <small class="numbers">Numbers from 2012.</small>
+                    <small class="numbers">Data from 2012.</small>
                 </div>
             </div>
         </section>
+    {{else}}
+
+        <section class="main-content intro">
+            <div class="row">
+                <h1>We believe the government should represent its citizens.</h1>
+
+                <div class="about">
+                    <h2>Did you know...</h2>
+                    <p>House majority leader, John Boehner's (R), second highest campaign contributor right now is Comcast Corp? ($50,200) </p>
+                </div>
+                <div class="about">
+                    <h5>Top Contributing Industries</h5>
+                    <ul>
+                        {{#each selectedRep.industries}}
+                            <li>
+                                <strong>{{displayName}}</strong><em>{{format-dollars amount}}</em>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
     {{/if}}
 {{/if}}

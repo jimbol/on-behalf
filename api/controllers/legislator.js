@@ -56,8 +56,8 @@ Legislator.prototype.findByCoods = function (){
 };
 
 Legislator.prototype.findByAddress = function (address){
-
     var _this = this;
+
     geocoder.geocode( address, function( err, data ){
         if (!data.results.length) {
 
@@ -163,7 +163,7 @@ Legislator.prototype.getContributors = function(legislator, callback){
 
     contributor.findById({
         id: legislator.entityId,
-        cycle: 2012,
+        cycle: 2014,
         limit: 7
     }, function( response ){
 
@@ -185,7 +185,7 @@ Legislator.prototype.getIndustries = function(legislator, callback){
 
     industry.findById({
         id: legislator.entityId,
-        cycle: 2012,
+        cycle: 2014,
         limit: 7
     }, function( response ){
 
