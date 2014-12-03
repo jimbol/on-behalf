@@ -2,12 +2,23 @@ sunlight-dashboard
 ==================
 
 Work-in-progress dashboard for viewing Sunlight Foundation data with Ember.
-But its going to be awesome.
 
-##For the Front End
-Install Ember-CLI to get started and follow [their documentation](http://iamstef.net/ember-cli/) to start it up.  This is used for the frontend.
+##Requires
+- NodeJS
+- NPM
 
-##For the API
+##Set Up Front End
+Install [Ember-CLI](http://iamstef.net/ember-cli/) to start it up
+
+    npm install -g ember-cli
+
+Then install dependencies
+
+    cd frontend
+    npm install
+    bower install
+
+##Set Up API
 In a seperate tab, move into api folder.
 
     cd api
@@ -30,10 +41,10 @@ So we can make queries and requests by ID (just with legislators right now) or u
     this.store.find('legislator', {
 	    bioguide_id: J000296
     });
-    // Makes this request to api 
+    // Makes this request to api
     // http://localhost:3000/api/legislators?bioguide_id=J000296
 
-    // Which routes to this request to Sunlight 
+    // Which routes to this request to Sunlight
     // https://congress.api.sunlightfoundation.com/legislators?bioguide_id=J000296
 
 Also we can find a user's reps based on address:
