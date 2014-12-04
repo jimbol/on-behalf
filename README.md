@@ -1,10 +1,9 @@
 OnBehalf
 ==================
 
-It is almost common knowledge that our national lawmakers do not serve the American people, but rather, various corporate interests.  The goal behind OnBehalf is to shine a light on corporations influences on your representatives so that you can better interpret their actions.  Eventually, we'd like to draw a direct correlation between a lawmaker's contributors and their voting habits.
+It is almost common knowledge that our national lawmakers do not serve the American people, but rather, various corporate interests.  The goal of OnBehalf is to shine a light on corporations' influence on your representatives so that you can better interpret their actions.  Eventually, we'd like to draw a direct correlation between a lawmaker's contributors and their voting habits.
 
 #Install Locally
-
 ##Requires
 - NodeJS
 - NPM
@@ -20,6 +19,10 @@ Then install dependencies
     npm install
     bower install
 
+Run with
+
+    ember server
+
 ##Set Up API
 In a seperate tab, move into api folder.
 
@@ -28,41 +31,46 @@ In a seperate tab, move into api folder.
 Install node and npm (if you haven't already).  Then install dependencies and run it!
 
     npm install
+
+Run with
+
     node server
 
 
-##API Usage
+#Usage
 
-Many of the normal Ember requests work just fine.
+##Request an individual legislator
 
-`http://localhost:3000/api/legislators/J000296` will return the legislator with a bioguide_id of J000296
-`http://localhost:3000/api/legislators?bioguide_id=J000296` will too!
-
-So we can make queries and requests by ID (just with legislators right now) or using the ember way of setting up queries.
+Request by `id`
 
     this.store.find('legislator', {
-	    bioguide_id: J000296
+        id: 'J000296'
     });
-    // Makes this request to api
-    // http://localhost:3000/api/legislators?bioguide_id=J000296
 
-    // Which routes to this request to Sunlight
-    // https://congress.api.sunlightfoundation.com/legislators?bioguide_id=J000296
+Calls
 
-Also we can find a user's reps based on address:
+    /api/legislators/J000296
+
+Which is the same as querying directly by `bioguide_id`
+
+    this.store.find('legislator', {
+        bioguide_id: 'J000296'
+    });
+
+Calls
+
+    /api/legislators?bioguide_id=J000296
+
+
+Find a user's reps based on address
 
     this.store.find('legislator', {
 	    address: '1740 Washington Rd, MI'
     });
-    // Returns all congress folks for that address
+    // Returns all legislators for that address
 
-Or zip code:
+Or zip code
 
 	this.store.find('legislator', {
 	    address: '60647'
     });
-    // Returns all congress folks for that zipcode
-
-
-
-
