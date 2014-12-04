@@ -1,7 +1,9 @@
-sunlight-dashboard
+OnBehalf
 ==================
 
-Work-in-progress dashboard for viewing Sunlight Foundation data with Ember.
+It is almost common knowledge that our national lawmakers do not serve the American people, but rather, various corporate interests.  The goal behind OnBehalf is to shine a light on corporations influences on your representatives so that you can better interpret their actions.  Eventually, we'd like to draw a direct correlation between a lawmaker's contributors and their voting habits.
+
+#Install Locally
 
 ##Requires
 - NodeJS
