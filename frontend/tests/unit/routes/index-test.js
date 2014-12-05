@@ -4,14 +4,14 @@ import startApp from '../../helpers/start-app';
 var App;
 
 moduleFor('route:index', 'Unit - IndexRoute', {
-    setup: function () {},
-    teardown: function () {}
+  setup: function () {},
+  teardown: function () {}
 });
 
 test('it has a model', function(){
 
-    var route = this.subject(),
-        model = JSON.stringify( route.model() );
+  var route = this.subject(),
+    model = JSON.stringify( route.model() );
 
-    ok( model === '{}', 'The model should be empty.' );
+  ok( model === '{}', 'The model should be empty.' );
 });

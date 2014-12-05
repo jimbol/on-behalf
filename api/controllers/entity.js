@@ -1,11 +1,11 @@
 // Entity methods
 var request =   require('request'),
-    Influence = require('../helpers/influence');
+  Influence = require('../helpers/influence');
 
 // Constructor
 var Entity = function(req, res){
-    this.req = req;
-    this.res = res;
+  this.req = req;
+  this.res = res;
 };
 
 Entity.prototype = new Influence();
@@ -14,24 +14,24 @@ Entity.prototype.baseUrl = 'http://transparencydata.com/api/1.0/entities/id_look
 
 // Methods
 Entity.prototype.get = function( bioGuideId, callback, context ) {
-    var options = this.createOptions( bioGuideId );
+  var options = this.createOptions( bioGuideId );
 
-    request( options, function ( error, response, body ){
-        if ( !error && response.statusCode == 200 ) {
-            var idObj = JSON.parse( body )[0];
-            callback.call( context, idObj.id );
-        }
-    });
+  request( options, function ( error, response, body ){
+    if ( !error && response.statusCode == 200 ) {
+      var idObj = JSON.parse( body )[0];
+      callback.call( context, idObj.id );
+    }
+  });
 };
 
 Entity.prototype.createOptions = function( bioGuideId ){
-    var url = this.baseUrl + '&bioguide_id=' + bioGuideId;
+  var url = this.baseUrl + '&bioguide_id=' + bioGuideId;
 
-    return {
-        url: url,
-        method: 'GET',
-        headers: this.headers
-    };
+  return {
+    url: url,
+    method: 'GET',
+    headers: this.headers
+  };
 };
 
 
