@@ -5,13 +5,18 @@ var attr 	= DS.attr,
 	hasMany = DS.hasMany;
 
 var Legislator = DS.Model.extend({
-	birthday:  		attr('string'),
-	first_name: 	attr('string'),
-  last_name:      attr('string'),
-  state_name:     attr('string'),
-	state_rank: 	attr('string'),
-	chamber: 		attr('string'),
-	party: 			attr('string'),
+	birthday:  		    attr('string'),
+	first_name: 	    attr('string'),
+  last_name:        attr('string'),
+  state_name:       attr('string'),
+	state_rank: 	    attr('string'),
+	chamber: 		      attr('string'),
+	party: 			      attr('string'),
+  title:            attr('string'),
+  phone:            attr('string'),
+  contact_form:     attr('string'),
+  oc_email:         attr('string'),
+  website:          attr('string'),
 
   contributors:   hasMany('contributor'),
 	industries: 	hasMany('industries'),
@@ -25,7 +30,6 @@ var Legislator = DS.Model.extend({
   }.property('chamber'),
 
   fullTitle: function(){
-
     var rank = this.get('state_rank'),
       chamberTitle = this.get('chamberTitle'),
       state = this.get('state_name').capitalize();
@@ -37,7 +41,21 @@ var Legislator = DS.Model.extend({
 
   formattedChamber: function(){
     return this.get('chamber').capitalize();
-  }.property('chamber')
+  }.property('chamber'),
+
+  formattedParty: function(){
+    var partyChar = this.get('party');
+    switch (partyChar){
+      case 'R':
+        return 'Republican';
+      case 'D':
+        return 'Democrat';
+      case 'I':
+        return 'Independent';
+      default:
+        return 'Other';
+    };
+  }.property('party')
 });
 
 export default Legislator;
