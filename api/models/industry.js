@@ -10,9 +10,6 @@ function Industry(){
   this.url = config.urls.transparency + 'aggregates/pol/';
 }
 
-// cycle = 2012
-// limit = 1
-
 Industry.prototype = new Model();
 
 Industry.prototype.findById = function( query, callback ){

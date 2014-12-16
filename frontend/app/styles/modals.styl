@@ -1,0 +1,95 @@
+.modal
+  position: fixed
+  height: 100%
+  width: 100%
+  background-color:rgba(0, 0, 0, 0.25)
+  z-index: 2
+
+  .contents
+    max-width: 800px
+    position: relative
+    background: white
+    margin: 25px auto
+    padding: 30px
+    border-radius: 5px
+    box-shadow: 0px 2px 5px darkTan
+
+    h3
+      font-family: andadasc
+      font-weight: normal
+      color: accentGreen
+      font-size: 25px
+
+    .row
+      padding: 0
+      margin-top: 30px
+      margin-bottom: 0
+
+      p
+        margin-top: 0
+
+      .colum
+        vertical-align: top
+        width: calc( 50% - 3px )
+        display: inline-block
+
+        textarea,
+        input
+          textInput()
+
+          font-size: 18px
+          padding: 5px
+          margin-bottom: 10px
+          width: calc(100% - 20px)
+
+        textarea
+          height: 135px
+
+        button
+          background: accentGreen
+          border-radius: 5px
+          border: 0
+          box-shadow: 0px 2px 5px darkTan
+          color: lighterTan
+          cursor: pointer
+          float: right
+          font-family: andadasc
+          font-size: 20px
+          margin: 2px 8px 0 0
+          padding: 10px
+          transition: padding-bottom 0.2s
+
+          &:active
+            box-shadow: none
+
+          &.cancel
+            background-color: darkTan
+
+          &:hover
+            background: accentPeach
+
+
+  .close
+    font-size: 12px
+    float: right
+    color: accentGreen
+    cursor: pointer
+    margin-top: -5px
+
+    div
+      display: inline-block
+      background-color: accentGreen
+      color: lighterTan
+
+      height: 16px
+      width: 12px
+      border-radius: 8px
+      padding-left: 5px
+
+    &:hover
+      color: accentPeach
+
+      div
+        background-color: accentPeach
+
+

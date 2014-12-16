@@ -2,6 +2,9 @@
 @import "fonts"
 @import "functions"
 
+@import "modals"
+@import "suggestions"
+
 // styles
 html, body, div, ul, h1, h2, h3, h4
   margin: 0
@@ -129,11 +132,15 @@ section
 .legislator-list
   vertical-align: top
   list-style: none
-  width: calc( 30% - 30px )
+  width: 100%
+  border-bottom: 1px solid #ddd
   margin-right: 30px
   display: inline-block
 
   .legislator
+    display: inline-block
+    vertical-align: top
+    width: calc(30% - 32px)
     padding: 15px 25px
     transition: background-color 0.2s
     border-radius: 10px 10px 0 0
@@ -148,8 +155,14 @@ section
       background-color: lighterTan
       border-bottom: 2px solid lightTan
 
+      h2
+        color: accentPeach
+
     &.selected
       background-color: middleTan
+
+      h2
+        color: accentPeach
 
     &:active
       background-color: middleTan
@@ -183,15 +196,14 @@ section
 
 .about,
 .legislator-detail
+  width: 100%
+  padding-top: 25px
+
   .colum
+    display: inline-block
+    padding-bottom: 50px
     vertical-align: top
     width: calc( 50% - 20px )
-    display: inline-block
-
-.legislator-detail
-  vertical-align: top
-  width: 70%
-  display: inline-block
 
   h2,
   h4,
@@ -243,30 +255,37 @@ section
         float: right
         color: accentPeach
 
-@media (max-width: 2000px)
+
+.about
+  div
+    padding-right: 0
+
+  h1
+    font-size: 40px
+    padding: 20px
+    border-top: 1px solid accentGreen
+    border-bottom: 1px solid accentGreen
+    background-color: lightTan
+    margin: 0 30px
+    border-radius: 20px
+    background-image: url("halftone.png")
+
+  h2
+    font-size: 25px
+    color: accentPeach
+    font-family: andadasc
+
+  p
+    margin-top: 10px
+    margin-bottom: 0
+    color: primaryTan
+
+@media (max-width: 900px)
 
   .main-content .row h1
     font-size: 40px
     text-align: center
 
-  .legislator-list
-    width: 100%
-    border-bottom: 1px solid #ddd
-
-
-    .legislator
-      display: inline-block
-      width: calc(30% - 32px)
-
-
-  .legislator-detail
-    width: 100%
-    padding-top: 25px
-
-    .colum
-      width: calc(50% - 20px)
-      display: inline-block
-      padding-bottom: 50px
 
 @media (max-width: 700px)
   header nav
