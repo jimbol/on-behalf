@@ -16,7 +16,7 @@ exports.define = function(app){
 		legislator.get();
 	});
 
-	app.post('/api/suggestion', function(req, res){
+	app.options('/api/suggestions', function(req, res){
 		var suggestion = new Suggestion( req, res );
 		suggestion.post();
 	});
