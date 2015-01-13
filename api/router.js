@@ -5,8 +5,8 @@ var express = require('express'),
 	querystring = require('querystring');
 
 
-var Legislator = 	require('./controllers/legislator'),
-	Suggestion = 	require('./controllers/suggestion');
+var Legislator = 	require('./controllers/legislator');
+	// Suggestion = 	require('./controllers/suggestion');
 
 
 exports.define = function(app){
@@ -16,10 +16,10 @@ exports.define = function(app){
 		legislator.get();
 	});
 
-	app.options('/api/suggestions', function(req, res){
-		var suggestion = new Suggestion( req, res );
-		suggestion.post();
-	});
+	// app.options('/api/suggestions', function(req, res){
+	// 	var suggestion = new Suggestion( req, res );
+	// 	suggestion.post();
+	// });
 
 	// Wildcard
 	// app.get('/*', function(req, res) {

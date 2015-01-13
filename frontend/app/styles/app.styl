@@ -4,6 +4,7 @@
 
 @import "modals"
 @import "suggestions"
+@import "legislator-page"
 
 // styles
 html, body, div, ul, h1, h2, h3, h4
@@ -24,7 +25,7 @@ header
   nav
     content()
 
-    h2
+    h2, h2 a
       inset()
 
       color: accentPeach
@@ -34,6 +35,8 @@ header
       font-weight: normal
       margin-top: 5px
 
+    h2 a 
+      text-decoration: none
 
     input
       textInput()
@@ -81,7 +84,7 @@ section
     content()
     padding-top: 60px
 
-    h2
+    h2, h2 a
       font-family: andadasc
       font-weight: normal
       color: primaryTan
@@ -195,7 +198,8 @@ section
     display: inline-block
 
 .about,
-.legislator-detail
+.legislator-detail,
+.legislator-page
   width: 100%
   padding-top: 25px
 
@@ -228,7 +232,7 @@ section
     font-size: 20px
     padding-bottom: 15px
 
-  div
+  div:first-of-type
     padding-right: 20px
     position: relative
     height: auto
