@@ -1,67 +1,18 @@
-<section>
-  <div class="search" {{bind-attr class="isZipcode::invalid"}}>
-    <h1>Who represents me?</h1>
-    {{input action="actionSearch" placeholder="Enter your zipcode" value=addressValue}}
-    {{#unless isZipcode}}
-      <h5>Are you sure you typed that right?  Thats not a zipcode.</h5>
-    {{/unless}}
-  </div>
-</section>
+{{search-bar address=address action="actionSearch"}}
 {{#if isLoading}}
   <section class="main-content">
     <div class="row"><h2>loading...</h2></div>
   </section>
 {{else}}
-  {{#if legislators}}
-    <section class="main-content">
-      <div class="row">
-        <h1>Who else do they represent?</h1>
-        <div class="colum">
-          <ul class="legislator-list">
-            {{#each legislator in legislators}}
-              {{legislator-list-item action="actionClearSelection" legislator=legislator}}
-            {{/each}}
-          </ul
-          ><div class="legislator-detail">
-            <h2>{{selectedRep.fullName}}</h2>
-            <p><h4>{{selectedRep.fullTitle}} ({{selectedRep.party}})</h4></p>
-            <div class="colum">
-              <h5>Top Contributors</h5>
-              <ul>
-                {{#each selectedRep.contributors}}
-                  <li>
-                    <strong>{{name}}</strong><em>{{format-dollars total_amount}}</em>
-                  </li>
-                {{/each}}
-              </ul>
-            </div
-            ><div class="colum">
-              <h5>Top Contributing Industries</h5>
-              <ul>
-                {{#each selectedRep.industries}}
-                  <li>
-                    <strong>{{displayName}}</strong><em>{{format-dollars amount}}</em>
-                  </li>
-                {{/each}}
-              </ul>
-            </div>
-          </div>
-        </div>
+  <section class="main-content intro">
+    <div class="about row">
+      <div class="colum">
+        <h1>We believe the government should represent its citizens.</h1>
       </div>
-    </section>
-  {{else}}
-
-    <section class="main-content intro">
-      <div class="about row">
-        <div class="colum">
-          <h1>We believe the government should represent its citizens.</h1>
-        </div>
-        <div class="colum">
-          <p><strong>It is common knowledge</strong> that, often, our national lawmakers do not serve the American people, but rather, various corporate interests.</p>
-          <p>The goal of OnBehalf is to shine a light on corporations' influence on your representatives so that you can better interpret their actions. Eventually, we'd like to draw a direct correlation between a lawmaker's contributors and their voting habits.</p>
-        </div>
+      <div class="colum">
+        <p><strong>It is common knowledge</strong> that, often, our national lawmakers do not serve the American people, but rather, various corporate interests.</p>
+        <p>The goal of OnBehalf is to shine a light on corporations' influence on your representatives so that you can better interpret their actions. Eventually, we'd like to draw a direct correlation between a lawmaker's contributors and their voting habits.</p>
       </div>
-    </section>
-
-  {{/if}}
+    </div>
+  </section>
 {{/if}}

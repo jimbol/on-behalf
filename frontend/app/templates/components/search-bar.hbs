@@ -1,0 +1,10 @@
+<section>
+  <div class="search" {{bind-attr class="isZipcode::invalid"}}>
+    <h1>Who represents me?</h1>
+    {{input action="actionSearch" placeholder="Enter your zipcode" value=address}}
+    <i class="fa fa-search search-btn" title="Search" {{action "actionSearch"}}></i>
+    {{#unless isZipcode}}
+      <h5>Are you sure you typed that right?  Thats not a zipcode.</h5>
+    {{/unless}}
+  </div>
+</section>

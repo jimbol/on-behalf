@@ -17,7 +17,9 @@ Entity.prototype.findId = function( query, callback ){
 };
 
 Entity.prototype.formatResponse = function( body ){
-  return JSON.parse( body )[0].id;
+  if(body){
+    return JSON.parse( body )[0].id;
+  }
 };
 
 module.exports = Entity;

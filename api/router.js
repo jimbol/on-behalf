@@ -5,8 +5,7 @@ var express = require('express'),
 	querystring = require('querystring');
 
 
-var Legislator = 	require('./controllers/legislator'),
-	Suggestion = 	require('./controllers/suggestion');
+var Legislator = 	require('./controllers/legislator');
 
 
 exports.define = function(app){
