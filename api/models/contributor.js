@@ -10,9 +10,6 @@ function Contributor(){
   this.url = config.urls.transparency + 'aggregates/pol/';
 }
 
-// cycle = 2012
-// limit = 1
-
 Contributor.prototype = new Model();
 
 Contributor.prototype.findById = function( query, callback ){

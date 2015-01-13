@@ -163,7 +163,6 @@ Legislator.prototype.getContributors = function(legislator, callback){
 
   contributor.findById({
     id: legislator.entityId,
-    cycle: 2012,
     limit: 15
   }, function( response ){
 

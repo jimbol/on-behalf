@@ -46,29 +46,19 @@
               </ul>
             </div>
           </div>
-          <small class="numbers">Data from 2012.</small>
         </div>
       </div>
     </section>
   {{else}}
 
     <section class="main-content intro">
-      <div class="row">
-        <h1>We believe the government should represent its citizens.</h1>
-
-        <div class="about">
-          <h2>Did you know...</h2>
-          <p>House majority leader, John Boehner's (R), second highest campaign contributor right now is Comcast Corp? ($50,200) </p>
+      <div class="about row">
+        <div class="colum">
+          <h1>We believe the government should represent its citizens.</h1>
         </div>
-        <div class="about">
-          <h5>Top Contributing Industries</h5>
-          <ul>
-            {{#each selectedRep.industries}}
-              <li>
-                <strong>{{displayName}}</strong><em>{{format-dollars amount}}</em>
-              </li>
-            {{/each}}
-          </ul>
+        <div class="colum">
+          <p><strong>It is common knowledge</strong> that, often, our national lawmakers do not serve the American people, but rather, various corporate interests.</p>
+          <p>The goal of OnBehalf is to shine a light on corporations' influence on your representatives so that you can better interpret their actions. Eventually, we'd like to draw a direct correlation between a lawmaker's contributors and their voting habits.</p>
         </div>
       </div>
     </section>
