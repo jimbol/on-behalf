@@ -7,6 +7,6 @@ export default Ember.Component.extend({
 
   click: function(){
     this.sendAction();
-    this.get( 'legislator' ).set( 'isSelected', true );
+    this.get('legislator').set('isSelected', true);
   }
 });

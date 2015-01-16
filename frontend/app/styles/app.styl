@@ -61,7 +61,19 @@ section
 
   .search
     content()
+    padding-bottom: 70px
     text-align: center
+
+    &.small
+      padding-top: 25px
+      padding-bottom: 0
+
+      h1
+        padding: 0
+        font-size: 50px
+        padding-right: 35px
+        display: inline-block
+
 
     .search-btn
       font-size: 35px
@@ -71,6 +83,9 @@ section
 
       &:hover
         color: accentPeach
+
+    &.small .search-btn
+
 
     &.invalid input
       border-color: accentPeach
@@ -101,7 +116,7 @@ section
 .main-content
   background-color: lightGrey
   border-top: 1px solid #ddd
-  margin-top: 60px
+  // margin-top: 60px
   min-height: 400px
 
   small
@@ -255,7 +270,7 @@ section
         background-color: middleTan
 
       strong
-        width: calc( 100% - 100px )
+        width: calc( 100% - 110px )
         overflow: hidden
         display: inline-block
         height: 24px

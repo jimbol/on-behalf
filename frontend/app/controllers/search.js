@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
 	triggerSearch: function(){
 		var query = this.get('model.query');
 		this.set('address', query);
+		debugger
 		if(query && this.get('isZipcode')){
 			this.search();
 		}
@@ -44,14 +45,12 @@ export default Ember.Controller.extend({
 		if ( !this.get('isZipcode') ) return;
 		this.set('isLoading', true);
 
+		_this.clearSelection();
 		var legislators = this.store.find('legislator', {
 			address: address
 		});
 
 		this.set('legislators', legislators);
-
-
-		_this.clearSelection();
 
 		legislators.then( function() {
 			_this.set('isLoading', false);
