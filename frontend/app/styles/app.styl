@@ -37,6 +37,8 @@ header
 
     h2 a 
       text-decoration: none
+      &:hover
+        text-decoration: none;
 
     input
       textInput()
@@ -58,6 +60,14 @@ h4
   color: primaryTan
   font-size: 25px
   padding: 0
+  
+a
+  text-decoration: none
+  color: lighten(accentPeach, 20%)
+  
+  &:hover
+    text-decoration: underline
+    
 
 section
   padding-bottom: 25px
@@ -250,7 +260,7 @@ section
         background-color: middleTan
 
       strong
-        width: calc( 100% - 100px )
+        max-width: calc( 100% - 100px )
         overflow: hidden
         display: inline-block
         height: 24px

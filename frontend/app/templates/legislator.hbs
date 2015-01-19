@@ -4,7 +4,7 @@
       {{model.title}}. {{model.first_name}} {{model.last_name}}  
     </h1>
      <h2 class="office">
-      {{model.state_name}} {{model.formattedChamber}}, {{model.formattedParty}} 
+      {{model.chamberTitle}}, {{model.state_name}} ({{model.party}})
     </h2>
   </div>
   <section class="main-content">
@@ -18,7 +18,20 @@
         </ul>
       </div>
       <div class="colum">
+        <h5>Detailed Info</h5>
+        <ul class="detailed-info">
+          <li><strong>Time in Office:</strong><em>{{model.termLength}}</em></li>
+          <li><strong>Time Left:</strong><em>{{model.termLeft}}</em></li>
+          <li><strong>Website:</strong><em><a {{bind-attr href="model.website"}}>{{model.website}}</a></em></li>
+          <li><strong>Twitter:</strong><em><a {{bind-attr href="model.twitterLink"}}>{{model.twitter_id}}</a></em></li>
+          <li><strong>Youtube</strong><em><a {{bind-attr href="model.youtubeLink"}}>{{model.youtube_id}}</a></em></li>
+        </ul>
         <h5>Contact</h5>
+        <ul>
+          <li><strong>Phone #:</strong><em>{{model.phone}}</em></li>
+          <li><strong>Email:</strong><em><a {{bind-attr href="model.emailLink"}}>{{model.oc_email}}</a></em></li>
+          <li><strong>Contact Form:</strong><em><a {{bind-attr href="model.contact_form"}}>View Form</a></em></li>
+        </ul>
       </div>
     </div>
   </section>
