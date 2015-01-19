@@ -6,8 +6,6 @@ var express = require('express'),
 
 
 var Legislator = 	require('./controllers/legislator');
-	// Suggestion = 	require('./controllers/suggestion');
-
 
 exports.define = function(app){
 
