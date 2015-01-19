@@ -1,17 +1,17 @@
 // Legislator
 import DS from 'ember-data';
 
-var attr 	= DS.attr,
-	hasMany = DS.hasMany;
+var attr  = DS.attr,
+  hasMany = DS.hasMany;
 
 var Legislator = DS.Model.extend({
-	birthday:  		    attr('string'),
-	first_name: 	    attr('string'),
+  birthday:         attr('string'),
+  first_name:       attr('string'),
   last_name:        attr('string'),
   state_name:       attr('string'),
-	state_rank: 	    attr('string'),
-	chamber: 		      attr('string'),
-	party: 			      attr('string'),
+  state_rank:       attr('string'),
+  chamber:          attr('string'),
+  party:            attr('string'),
   title:            attr('string'),
   phone:            attr('string'),
   contact_form:     attr('string'),
@@ -24,7 +24,7 @@ var Legislator = DS.Model.extend({
   office:           attr('string'),
 
   contributors:   hasMany('contributor'),
-	industries: 	hasMany('industries'),
+  industries:   hasMany('industries'),
 
   fullName: function(){
     return this.get('first_name') + ' ' + this.get('last_name');
