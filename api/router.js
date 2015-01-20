@@ -7,7 +7,6 @@ var express = require('express'),
 
 var Legislator = 	require('./controllers/legislator');
 
-
 exports.define = function(app){
 
 	app.get('/api/legislator*', function(req, res){
@@ -15,10 +14,10 @@ exports.define = function(app){
 		legislator.get();
 	});
 
-	app.options('/api/suggestions', function(req, res){
-		var suggestion = new Suggestion( req, res );
-		suggestion.post();
-	});
+	// app.options('/api/suggestions', function(req, res){
+	// 	var suggestion = new Suggestion( req, res );
+	// 	suggestion.post();
+	// });
 
 	// Wildcard
 	// app.get('/*', function(req, res) {

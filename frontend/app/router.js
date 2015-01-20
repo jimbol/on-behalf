@@ -9,4 +9,8 @@ Router.map(function() {
   this.route("search", { path: "/search/:query" });
 });
 
+Router.map(function() {
+  this.resource('legislator', { path: '/legislator/:legislator_id' });
+});
+
 export default Router;

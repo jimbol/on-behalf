@@ -15,7 +15,7 @@
             {{/each}}
           </ul
           ><div class="legislator-detail">
-            <h2>{{selectedRep.fullName}}</h2>
+            <h2>{{#link-to 'legislator' selectedRep}}{{selectedRep.fullName}}{{/link-to}}</h2>
             <p><h4>{{selectedRep.fullTitle}} ({{selectedRep.party}})</h4></p>
             <div class="colum">
               <h5>Top Contributors</h5>
