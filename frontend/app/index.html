@@ -6,22 +6,16 @@
     <title>OnBehalf</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {{BASE_TAG}}
+    {{content-for 'head'}}
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/on-behalf.css">
   </head>
   <body>
-    <script>
-      window.OnBehalfENV = {{ENV}};
-      window.EmberENV = window.OnBehalfENV.EmberENV;
-    </script>
+    {{content-for 'body'}}
+
     <script src="assets/vendor.js"></script>
     <script src="assets/on-behalf.js"></script>
-    <script>
-      window.OnBehalf = require('on-behalf/app')['default'].create(OnBehalfENV.APP);
-    </script>
     <script>
     // Include the UserVoice JavaScript SDK (only needed once on a page)
     UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/KzuTySzF0LQQom7rNQdBLA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
