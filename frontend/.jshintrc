@@ -1,10 +1,9 @@
 {
-  "predef": {
-    "$": true,
-    "document": true,
-    "window": true,
-    "OnBehalfENV": true
-  },
+  "predef": [
+    "document",
+    "window",
+    "-Promise"
+  ],
   "browser" : true,
   "boss" : true,
   "curly": true,
