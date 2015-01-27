@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
 	triggerSearch: function(){
 		var query = this.get('model.query');
 		this.set('address', query);
-		debugger
 		if(query && this.get('isZipcode')){
 			this.search();
 		}
