@@ -1,3 +1,6 @@
+**This repo is *deprecated* and has been split into two, the [on-behalf-api](https://github.com/jimbol/on-behalf-api) and the [on-behalf-frontent](https://github.com/jimbol/on-behalf-frontend)**
+
+
 OnBehalf
 ==================
 
